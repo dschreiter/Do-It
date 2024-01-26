@@ -3,7 +3,6 @@ import "./App.css";
 import { Button } from "semantic-ui-react";
 
 function App() {
-	//prehook test
 	const [toDoList, setToDoList] = useState([]);
 	const [modal, setModal] = useState(false);
 	const [task, setTask] = useState({
