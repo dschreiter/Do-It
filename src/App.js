@@ -1,38 +1,17 @@
 import { useState } from "react";
 import "./App.css";
-import { Button } from "semantic-ui-react";
+import CreateTaskModal from "./components/CreateTodo";
 
 function App() {
 	const [toDoList, setToDoList] = useState([]);
-	const [modal, setModal] = useState(false);
 	const [task, setTask] = useState({
 		name: "",
 		completed: false,
 		priority: "",
 	});
 
-	const formSubmitHandler = (e) => {
-		e.preventDefault();
-		if (task.name === "" || task.priority === "") return;
-
-		setToDoList([
-			...toDoList,
-			{
-				id: Math.floor(Math.random() * 1000) + 1,
-				...task,
-			},
-		]);
-
-		// Clear form
-		setTask({
-			name: "",
-			completed: false,
-			priority: "",
-		});
-	};
-
 	const editListItem = (id) => {
-		setModal((prevState) => !prevState);
+		console.log(411, "in edit");
 	};
 
 	const deleteListItem = (id) => {
@@ -63,28 +42,16 @@ function App() {
 
 	return (
 		<>
-			<form onSubmit={formSubmitHandler}>
-				<input
-					type="text"
-					value={task.name}
-					onChange={(e) => setTask({ ...task, name: e.target.value })}
+			<div className="flex-center">
+				<CreateTaskModal
+					task={task}
+					setTask={setTask}
+					toDoList={toDoList}
+					setToDoList={setToDoList}
 				/>
+			</div>
 
-				<select
-					value={task.priority}
-					onChange={(e) => setTask({ ...task, priority: e.target.value })}
-				>
-					<option value="">Select Priority</option>
-					<option value="High">High</option>
-					<option value="Medium">Medium</option>
-					<option value="Low">Low</option>
-				</select>
-				<button type="submit">Add Todo</button>
-			</form>
-			{modal && "show modal"}
 			<ul>{renderList}</ul>
-
-			<Button content="Primary" primary />
 		</>
 	);
 }
