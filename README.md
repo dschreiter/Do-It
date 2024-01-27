@@ -1,3 +1,39 @@
+
+# Project Overview
+## Rational: Yet Another Todo App, Why? Seems simple, Well:
+
+1. **Spans the entire development stack:**
+   - a. Design
+   - b. Front-end development
+   - c. Back-end logic
+   - d. Database management
+   - e. Scalability and Performance
+
+2. **Lightweight logic, yet covers most Front End App requirements:**
+   - a. Create, edit, delete
+   - b. Sorting
+   - c. Searchable
+   - d. Drag & Drop
+   - e. Routing
+   - f. User Authentication
+
+3. **UI considerations:**
+   - a. Wireframing
+   - b. Responsive
+   - c. Accessibilty: WCAG standards
+
+4. **Scaffolding & Tech Stack Choices:**
+   - a. GitHub: workflow, permissions, CI/CD, etc.
+   - b. Frameworks, Libriares
+   - c.  Testing (Jest)
+   - d. API: (REST, GraphQL)
+   - e. DB: SQL, data validation
+
+5. **Scalability & Performance:**
+   - a. Database Optimization: Indexing, proper schema design, and query optimization.
+   - b. Caching
+   - c. Pagination
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
