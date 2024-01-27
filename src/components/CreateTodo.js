@@ -1,53 +1,49 @@
 import React, { useState } from "react";
-import {
-	ModalHeader,
-	ModalDescription,
-	ModalContent,
-	ModalActions,
-	Button,
-	Modal,
-	Select,
-	FormField,
-	Form,
-} from "semantic-ui-react";
 
-function CreateTodo({ task, setTask, toDoList, setToDoList }) {
+import { Button, Select, FormField, Form } from "semantic-ui-react";
+
+import ModalSemanticUI from "./Semantic-UI/ModalSemanticUI";
+
+function CreateTodo({ todo, setTodo, toDoList, setToDoList }) {
 	const [open, setOpen] = useState(false);
 
-	const addTask = () => {
-		if (task.name === "" || task.priority === "") return;
+	const addTodo = () => {
+		if (todo.name === "" || todo.priority === "") return;
 
 		setToDoList([
 			...toDoList,
 			{
 				id: Math.floor(Math.random() * 1000) + 1,
-				...task,
+				...todo,
 			},
 		]);
 
 		// Clear form
-		setTask({
+		setTodo({
 			name: "",
 			completed: false,
 			priority: "",
 		});
 
+		//close Modal
 		setOpen(false);
 	};
 
-	const cancelTask = () => {
-		setOpen(false);
-
+	const cancelTodo = () => {
 		// Clear form
-		setTask({
+		setTodo({
 			name: "",
 			completed: false,
 			priority: "",
 		});
+
+		//close Modal
+		setOpen(false);
 	};
 
-	const ModalElem = {
-		openModalBtn: <Button circular icon="plus" color="green" size="big" />,
+	const modalConfig = {
+		size: "mini",
+		modalTrigger: <Button circular icon="plus" color="green" size="big" />,
 		title: "Create a Todo",
 		body: (
 			<Form>
@@ -55,8 +51,8 @@ function CreateTodo({ task, setTask, toDoList, setToDoList }) {
 					<label>Todo</label>
 					<input
 						type="text"
-						value={task.name}
-						onChange={(e) => setTask({ ...task, name: e.target.value })}
+						value={todo.name}
+						onChange={(e) => setTodo({ ...todo, name: e.target.value })}
 					/>
 				</FormField>
 				<FormField>
@@ -68,7 +64,7 @@ function CreateTodo({ task, setTask, toDoList, setToDoList }) {
 							{ key: "3", value: "High", text: "High" },
 						]}
 						onChange={(event, data) =>
-							setTask({ ...task, priority: data.value })
+							setTodo({ ...todo, priority: data.value })
 						}
 					/>
 				</FormField>
@@ -76,14 +72,14 @@ function CreateTodo({ task, setTask, toDoList, setToDoList }) {
 		),
 		buttons: (
 			<>
-				<Button color="black" onClick={cancelTask}>
+				<Button color="black" onClick={cancelTodo}>
 					Cancel
 				</Button>
 				<Button
 					content="Add Todo"
 					labelPosition="right"
 					icon="checkmark"
-					onClick={addTask}
+					onClick={addTodo}
 					positive
 				/>
 			</>
@@ -91,19 +87,15 @@ function CreateTodo({ task, setTask, toDoList, setToDoList }) {
 	};
 
 	return (
-		<Modal
-			size="mini"
-			onClose={() => setOpen(false)}
-			onOpen={() => setOpen(true)}
+		<ModalSemanticUI
+			size={modalConfig.size}
+			modalTrigger={modalConfig.modalTrigger}
+			title={modalConfig.title}
+			body={modalConfig.body}
+			buttons={modalConfig.buttons}
 			open={open}
-			trigger={ModalElem.openModalBtn}
-		>
-			<ModalHeader>{ModalElem.title}</ModalHeader>
-			<ModalContent>
-				<ModalDescription>{ModalElem.body}</ModalDescription>
-			</ModalContent>
-			<ModalActions>{ModalElem.buttons}</ModalActions>
-		</Modal>
+			setOpen={setOpen}
+		/>
 	);
 }
 

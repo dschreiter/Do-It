@@ -1,10 +1,10 @@
 import { useState } from "react";
 import "./App.css";
-import CreateTaskModal from "./components/CreateTodo";
+import CreateTodo from "./components/CreateTodo";
 
 function App() {
 	const [toDoList, setToDoList] = useState([]);
-	const [task, setTask] = useState({
+	const [todo, setTodo] = useState({
 		name: "",
 		completed: false,
 		priority: "",
@@ -19,7 +19,7 @@ function App() {
 		setToDoList(filteredList);
 	};
 
-	const taskDone = (id) => {
+	const todoDone = (id) => {
 		// remove edit, and delete icons, add check mark
 
 		const updatedList = toDoList.map((currentToDolist) =>
@@ -36,22 +36,22 @@ function App() {
 			{curr.name}-{curr.priority}
 			<button onClick={() => editListItem(curr.id)}>Edit</button>
 			<button onClick={() => deleteListItem(curr.id)}>X</button>
-			<button onClick={() => taskDone(curr.id)}>Done</button>
+			<button onClick={() => todoDone(curr.id)}>Done</button>
 		</li>
 	));
 
 	return (
 		<>
 			<div className="flex-center">
-				<CreateTaskModal
-					task={task}
-					setTask={setTask}
+				<CreateTodo
+					todo={todo}
+					setTodo={setTodo}
 					toDoList={toDoList}
 					setToDoList={setToDoList}
 				/>
-			</div>
 
-			<ul>{renderList}</ul>
+				<ul>{renderList}</ul>
+			</div>
 		</>
 	);
 }
